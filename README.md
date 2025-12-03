@@ -20,3 +20,27 @@ This Java project simulates a grocery store system where customers can add items
 - Add data persistence (saving/loading to a file)
 - Add multiple customer support
 - Implement a GUI
+
+## Version Control
+This project uses Git for version control. Features were developed in separate branches (e.g., `feature/customer-class `, `feature/grocery-class`) and merged into `main` following a professional workflow.
+
+## Example Run
+Welcome to Smart Store!
+Enter customer name: Mack
+Enter grocery item name: Eggs
+Enter price: 3.22
+Enter quantity: 3
+Add another item? (y/n): n
+
+Mack has the following items:
+Item: Eggs
+Price: 3.22
+Quantity: 3
+
+Total: 9.66
+
+## Requirements
+- Java 21 or later
+
+## License
+This project is open-source and intended as a portfolio demonstration.
