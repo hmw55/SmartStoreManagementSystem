@@ -13,7 +13,34 @@ public class StoreApp {
             Customer customer = new Customer();
             customer.setName(customerName);
 
-            String addMore;
+            // Step 2: Handle shopping input
+            handleCustomerShopping(customer, scnr);
+
+
+            // Step 3: Display all groceries and total
+            System.out.println("\n" + customer.getName() + " has the following items:\n");
+            double total = 0.0;
+            for (Grocery g : customer.getGroceryList()) {
+                System.out.println("Item: " + g.getName());
+                System.out.println("Price: " + g.getPrice());
+                System.out.println("Quantity: " + g.getQuantity() + "\n");
+                total += g.getPrice() * g.getQuantity();
+            }
+
+            System.out.printf("Total: %.2f\n", total);
+
+            // DONE: All input uses nextLine(), avoiding mashed output
+            // DONE: Preset items and quantity picking work
+
+            // TODO: Consider moving the customer input logic to a separate method to make main() cleaner
+            // TODO: Add support for multiple customers (currently only one customer is supported)
+            // TODO: Implement a GUI version (console app is working for now)
+            // TODO: Add file persistence (save/load customer and grocery list to file)
+            // TODO: Add input validation for price and quantity (currently assumes numeric input)
+        }
+    }
+    public static void handleCustomerShopping(Customer customer, Scanner scnr) {
+                    String addMore;
             do {
                 // Step 2: Choose preset or custom item
                 System.out.println("\nDo you want to add a preset item or a custom item?");
@@ -64,27 +91,5 @@ public class StoreApp {
                 System.out.print("Add another item? (y/n): ");
                 addMore = scnr.nextLine();
             } while (addMore.equalsIgnoreCase("y"));
-
-            // Step 3: Display all groceries and total
-            System.out.println("\n" + customer.getName() + " has the following items:\n");
-            double total = 0.0;
-            for (Grocery g : customer.getGroceryList()) {
-                System.out.println("Item: " + g.getName());
-                System.out.println("Price: " + g.getPrice());
-                System.out.println("Quantity: " + g.getQuantity() + "\n");
-                total += g.getPrice() * g.getQuantity();
-            }
-
-            System.out.printf("Total: %.2f\n", total);
-
-            // DONE: All input uses nextLine(), avoiding mashed output
-            // DONE: Preset items and quantity picking work
-
-            // TODO: Consider moving the customer input logic to a separate method to make main() cleaner
-            // TODO: Add support for multiple customers (currently only one customer is supported)
-            // TODO: Implement a GUI version (console app is working for now)
-            // TODO: Add file persistence (save/load customer and grocery list to file)
-            // TODO: Add input validation for price and quantity (currently assumes numeric input)
-        }
     }
 }
