@@ -14,6 +14,7 @@ This Java project simulates a grocery store system where customers can add items
     ```bash
     javac com/smartstore/*.java
 2. Run the application:
+    ```bash
     java com.smartstore.StoreApp
 
 ## Future Planned Improvements:
