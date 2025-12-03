@@ -44,6 +44,7 @@ public class StoreApp {
             total += g.getPrice() * g.getQuantity(); 
         }
 
+        scnr.close();
         System.out.printf("Total: %.2f\n", total);
     }
 }
