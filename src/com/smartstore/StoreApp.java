@@ -32,11 +32,12 @@ public class StoreApp {
             // DONE: All input uses nextLine(), avoiding mashed output
             // DONE: Preset items and quantity picking work
             // DONE: Input logic moved to a separate method (handleCustomerShopping)
+            // DONE: Add input validation for price and quantity (currently assumes numeric input)
+
 
             // TODO: Add support for multiple customers (currently only one customer is supported)
             // TODO: Implement a GUI version (console app is working for now)
             // TODO: Add file persistence (save/load customer and grocery list to file)
-            // TODO: Add input validation for price and quantity (currently assumes numeric input)
         }
     }
     public static void handleCustomerShopping(Customer customer, Scanner scnr) {
