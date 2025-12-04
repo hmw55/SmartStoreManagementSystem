@@ -31,8 +31,8 @@ public class StoreApp {
 
             // DONE: All input uses nextLine(), avoiding mashed output
             // DONE: Preset items and quantity picking work
+            // DONE: Input logic moved to a separate method (handleCustomerShopping)
 
-            // TODO: Consider moving the customer input logic to a separate method to make main() cleaner
             // TODO: Add support for multiple customers (currently only one customer is supported)
             // TODO: Implement a GUI version (console app is working for now)
             // TODO: Add file persistence (save/load customer and grocery list to file)
@@ -46,10 +46,9 @@ public class StoreApp {
                 System.out.println("\nDo you want to add a preset item or a custom item?");
                 System.out.println("1. Preset item");
                 System.out.println("2. Custom item");
-                System.out.print("Enter choice (1 or 2): ");
-                String choice = scnr.nextLine();
+                int choice = getInt(scnr, "Enter choice (1 for preset, 2 for custom): ", 1,2);
 
-                if (choice.equals("1")) {
+                if (choice == 1) {
                     // Show preset items
                     System.out.println("Preset items:");
                     for (int i = 0; i < PresetItems.PRESETS.length; i++) {
@@ -57,39 +56,73 @@ public class StoreApp {
                         System.out.printf("%d. %s - $%.2f%n", i + 1, g.getName(), g.getPrice());
                     }
 
-                    System.out.print("Enter item number to add: ");
-                    int itemNum = Integer.parseInt(scnr.nextLine());
-
+                    int itemNum = getInt(scnr, "Emter item number to add: ", 1, PresetItems.PRESETS.length);
+                    
                     if (itemNum >= 1 && itemNum <= PresetItems.PRESETS.length) {
                         Grocery g = PresetItems.PRESETS[itemNum - 1];
 
                         // Ask for quantity
-                        System.out.print("Enter quantity: ");
-                        int qty = Integer.parseInt(scnr.nextLine());
+                        int qty = getInt(scnr, "Enter quantity: ", 1, 1000);
 
                         customer.addGrocery(new Grocery(g.getName(), g.getPrice(), qty));
                     } else {
                         System.out.println("Invalid selection.");
                     }
 
-                } else if (choice.equals("2")) {
+                } else {
                     // Custom item
                     System.out.print("Enter grocery item name: ");
                     String itemName = scnr.nextLine();
 
-                    System.out.print("Enter price: ");
-                    double price = Double.parseDouble(scnr.nextLine());
+                    double price = getDouble(scnr, "Enter price: ", 0.0);
 
-                    System.out.print("Enter quantity: ");
-                    int quantity = Integer.parseInt(scnr.nextLine());
+                    int quantity = getInt(scnr, "Enter quantity:", 1, 1000);
 
                     customer.addGrocery(new Grocery(itemName, price, quantity));
-                } else {
-                    System.out.println("Invalid choice, try again.");
-                }
+                } 
 
                 System.out.print("Add another item? (y/n): ");
                 addMore = scnr.nextLine();
             } while (addMore.equalsIgnoreCase("y"));
+    }
+
+    // Helper method to get an integer from user within a range
+    public static int getInt(Scanner scnr, String prompt, int min, int max) {
+        int result = 0;
+        while (true) {
+            System.out.print(prompt);
+            String input = scnr.nextLine();
+            try {
+                result = Integer.parseInt(input);
+                if (result < min || result > max) {
+                    System.out.println("Number must be between " + min + " and " + max + ".");
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number. Please enter an integer.");
+            }
+        }
+        return result;
+    }
+
+    // Helper method to get a double from user above a minimum
+    public static double getDouble(Scanner scnr, String prompt, double min) {
+        double result = 0.0;
+        while (true) {
+            System.out.print(prompt);
+            String input = scnr.nextLine();
+            try {
+                result = Double.parseDouble(input);
+                if (result < min) {
+                    System.out.println("Number must be at least " + min + ".");
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number. Please enter a number.");
+            }
+        }
+        return result;
     }
 }
